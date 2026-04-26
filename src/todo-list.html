@@ -24,7 +24,6 @@
 <hr>
 
 <h2>Thêm công việc</h2>
-
 <form th:action="@{/todos}" th:object="${todo}" method="post">
 
     Nội dung:
@@ -47,5 +46,19 @@
     <br><br>
     <button type="submit">Thêm</button>
 </form>
+
+<tr th:each="t : ${todos}">
+    <td th:text="${t.content}"></td>
+    <td th:text="${t.dueDate}"></td>
+    <td th:text="${t.status}"></td>
+    <td th:text="${t.priority}"></td>
+    <td>
+        <a th:href="@{/todos/edit/{id}(id=${t.id})}">Sửa</a>
+        <a th:href="@{/todos/delete/{id}(id=${t.id})}"
+           onclick="return confirm('Bạn có chắc muốn xóa?')">
+            Xóa
+        </a>
+    </td>
+</tr>
 </body>
 </html>
