@@ -57,4 +57,30 @@ public class TodoController {
         redirectAttributes.addFlashAttribute("message", "Xóa thành công!");
         return "redirect:/todos";
     }
+
+    @GetMapping("/start")
+    public String showStartPage() {
+        return "start";
+    }
+
+    @PostMapping("/start")
+    public String saveOwner(@RequestParam String ownerName,
+                            HttpSession session) {
+        session.setAttribute("owner", ownerName);
+        return "redirect:/todos";
+    }
+
+    @GetMapping
+    public String listTodos(Model model, HttpSession session) {
+        String owner = (String) session.getAttribute("owner");
+        if (owner == null) {
+            return "redirect:/todos/start";
+        }
+
+        model.addAttribute("owner", owner);
+        model.addAttribute("todos", todoRepository.findAll());
+        model.addAttribute("todo", new Todo());
+
+        return "todo-list";
+    }
 }

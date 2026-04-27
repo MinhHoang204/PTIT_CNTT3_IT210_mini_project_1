@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form th:action="@{/todos/start}" method="post">
+    Nhập tên của bạn:
+    <input type="text" name="ownerName" required>
+    <button type="submit">Bắt đầu</button>
+</form>
+
+<h3>Danh sách của: <span th:text="${owner}"></span></h3>
+</body>
+</html>
